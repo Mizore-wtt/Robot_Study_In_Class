@@ -1,0 +1,11 @@
+apriltag:
+  ros__parameters:
+    use_sim_time: true
+    # Black square edge (excluding the outer white margin), in metres.
+    tag_size: 0.24
+    tag_ids: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    threads: 2
+    quad_decimate: 1.0
+    max_hamming: 0
+    publish_tf: true
+    publish_detections_image: true

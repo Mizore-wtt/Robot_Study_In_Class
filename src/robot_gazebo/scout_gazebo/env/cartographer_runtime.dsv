@@ -1,0 +1,4 @@
+prepend-non-duplicate-if-exists;AMENT_PREFIX_PATH;../cartographer_runtime/opt/ros/humble
+prepend-non-duplicate-if-exists;LD_LIBRARY_PATH;../cartographer_runtime/opt/ros/humble/lib
+prepend-non-duplicate-if-exists;LD_LIBRARY_PATH;../cartographer_runtime/usr/lib/x86_64-linux-gnu
+prepend-non-duplicate-if-exists;PYTHONPATH;../cartographer_runtime/opt/ros/humble/local/lib/python3.10/dist-packages

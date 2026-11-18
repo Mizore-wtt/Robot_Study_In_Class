@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!-- Geometry adapted from the supplied Intel/Marton Juhasz D435 description.
+     Standard Gazebo sensors approximate RGB-D output; no IR/stereo emulation. -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="realsense_d435" params="sensor_name parent_link *origin rate:=15.0">
+    <joint name="${sensor_name}_joint" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent_link}"/><child link="${sensor_name}_link"/>
+    </joint>
+    <link name="${sensor_name}_link">
+      <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+      </inertial>
+      <visual>
+        <origin rpy="${pi/2} 0 ${pi/2}"/>
+        <geometry><mesh filename="file://$(find realsense_ros_gazebo)/meshes/realsense_d435.stl"/></geometry>
+        <material name="camera_gray"><color rgba="0.7 0.7 0.7 1"/></material>
+      </visual>
+    </link>
+    <!-- ROS optical convention: x right, y down, z forward. -->
+    <joint name="${sensor_name}_color_optical_joint" type="fixed">
+      <parent link="${sensor_name}_link"/><child link="${sensor_name}_color_optical_frame"/>
+      <origin rpy="${-pi/2} 0 ${-pi/2}"/>
+    </joint>
+    <link name="${sensor_name}_color_optical_frame"/>
+    <joint name="${sensor_name}_depth_optical_joint" type="fixed">
+      <parent link="${sensor_name}_link"/><child link="${sensor_name}_depth_optical_frame"/>
+      <origin rpy="${-pi/2} 0 ${-pi/2}"/>
+    </joint>
+    <link name="${sensor_name}_depth_optical_frame"/>
+    <gazebo reference="${sensor_name}_link">
+      <sensor name="${sensor_name}_rgbd" type="depth">
+        <always_on>true</always_on><update_rate>${rate}</update_rate>
+        <camera name="${sensor_name}">
+          <horizontal_fov>1.211</horizontal_fov>
+          <image><width>640</width><height>480</height><format>R8G8B8</format></image>
+          <clip><near>0.1</near><far>20</far></clip>
+          <depth_camera><clip><near>0.2</near><far>10</far></clip></depth_camera>
+        </camera>
+        <plugin name="${sensor_name}_rgbd_plugin" filename="libgazebo_ros_camera.so">
+          <ros>
+            <namespace>/${sensor_name}</namespace>
+            <remapping>${sensor_name}/image_raw:=color/image_raw</remapping>
+            <remapping>${sensor_name}/camera_info:=color/camera_info</remapping>
+            <remapping>${sensor_name}/depth/image_raw:=depth/image_raw</remapping>
+            <remapping>${sensor_name}/depth/camera_info:=depth/camera_info</remapping>
+            <remapping>${sensor_name}/points:=depth/points</remapping>
+          </ros>
+          <camera_name>${sensor_name}</camera_name>
+          <frame_name>${sensor_name}_color_optical_frame</frame_name>
+          <min_depth>0.2</min_depth><max_depth>10.0</max_depth>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+</robot>

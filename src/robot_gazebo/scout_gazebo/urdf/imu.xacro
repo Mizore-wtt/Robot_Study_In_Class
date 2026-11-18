@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="imu" params="sensor_name parent_link *origin">
+    <joint name="imutobase" type="fixed">
+      <xacro:insert_block name="origin"/>
+      <parent link="${parent_link}"/>
+      <child link="imu_base"/>
+    </joint>
+    <link name="imu_base">
+      <visual>
+        <geometry><box size="0.05 0.05 0.05"/></geometry>
+        <material name="imu_red"><color rgba="1 0 0 1"/></material>
+      </visual>
+      <xacro:Box_inertial_matrix m="0.01" l="0.05" w="0.05" h="0.05"/>
+    </link>
+    <gazebo reference="imu_base">
+      <material>Gazebo/Red</material>
+      <sensor name="${sensor_name}_sensor" type="imu">
+        <always_on>true</always_on>
+        <update_rate>100</update_rate>
+        <imu>
+          <angular_velocity>
+            <x><noise type="gaussian"><stddev>0.001</stddev></noise></x>
+            <y><noise type="gaussian"><stddev>0.001</stddev></noise></y>
+            <z><noise type="gaussian"><stddev>0.001</stddev></noise></z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x><noise type="gaussian"><stddev>0.01</stddev></noise></x>
+            <y><noise type="gaussian"><stddev>0.01</stddev></noise></y>
+            <z><noise type="gaussian"><stddev>0.01</stddev></noise></z>
+          </linear_acceleration>
+        </imu>
+        <plugin name="scout_imu" filename="libgazebo_ros_imu_sensor.so">
+          <ros><namespace>/imu</namespace><remapping>~/out:=data</remapping></ros>
+          <frame_name>imu_base</frame_name>
+          <initial_orientation_as_reference>false</initial_orientation_as_reference>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+</robot>

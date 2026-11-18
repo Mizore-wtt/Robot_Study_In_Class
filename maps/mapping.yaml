@@ -1,0 +1,6 @@
+image: /home/ubuntu22/study/slam/maps/mapping.pgm
+resolution: 0.050000
+origin: [-60.754559, -44.116449, 0.0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196

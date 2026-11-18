@@ -1,0 +1,11 @@
+pointcloud_to_scan:
+  ros__parameters:
+    # Heights are expressed in the velodyne frame, relative to the lidar origin.
+    # VLP-16 has no horizontal (0 degree) beam. +/-0.4 m retains the +/-1
+    # degree beams to 20 m while remaining above the ground at lidar height.
+    min_height: -0.40
+    max_height: 0.40
+    range_min: 0.2
+    range_max: 20.0
+    scan_bins: 720
+    scan_time: 0.1

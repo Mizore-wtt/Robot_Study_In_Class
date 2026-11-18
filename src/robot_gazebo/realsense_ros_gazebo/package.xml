@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>realsense_ros_gazebo</name>
+  <version>1.2.1</version>
+  <description>D435 geometry with standard ROS 2 Gazebo RGB and depth sensors.</description>
+  <maintainer email="ubuntu22@localhost.localdomain">Experiment 9 maintainers</maintainer>
+  <author>Intel Corporation and Marton Juhasz; adapted for experiment 9</author>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>gazebo_plugins</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

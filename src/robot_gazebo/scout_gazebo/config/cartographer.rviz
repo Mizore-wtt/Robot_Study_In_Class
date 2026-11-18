@@ -1,0 +1,108 @@
+Panels:
+- Class: rviz_common/Displays
+  Name: Displays
+Visualization Manager:
+  Class: ''
+  Global Options:
+    Fixed Frame: map
+    Background Color: 40; 40; 40
+    Frame Rate: 30
+  Displays:
+  - Class: rviz_default_plugins/Map
+    Name: Saved or live map
+    Enabled: true
+    Topic:
+      Value: /map
+      Reliability Policy: Reliable
+      Durability Policy: Transient Local
+      Depth: 1
+    Alpha: 0.8
+  - Class: rviz_default_plugins/Grid
+    Name: Grid
+    Enabled: true
+    Plane Cell Count: 40
+    Cell Size: 1
+  - Class: rviz_default_plugins/RobotModel
+    Name: Scout
+    Enabled: true
+    Description Source: Topic
+    Description Topic:
+      Value: /robot_description
+      Durability Policy: Transient Local
+      Reliability Policy: Reliable
+      History Policy: Keep Last
+      Depth: 1
+  - Class: rviz_default_plugins/TF
+    Name: TF
+    Enabled: false
+    Show Names: true
+  - Class: rviz_default_plugins/LaserScan
+    Name: Scan
+    Enabled: true
+    Topic:
+      Value: /scan
+      Reliability Policy: Best Effort
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Depth: 5
+    Size (m): 0.03
+    Style: Points
+    Color Transformer: FlatColor
+    Color: 255; 80; 80
+  - Class: rviz_default_plugins/PointCloud2
+    Name: VLP16
+    Enabled: false
+    Topic:
+      Value: /velodyne_points
+      Reliability Policy: Best Effort
+      Durability Policy: Volatile
+      History Policy: Keep Last
+      Depth: 5
+    Size (m): 0.02
+    Style: Points
+    Color Transformer: AxisColor
+    Axis: Z
+  - Class: rviz_default_plugins/MarkerArray
+    Name: Trajectory
+    Enabled: true
+    Topic:
+      Value: /trajectory_node_list
+      Reliability Policy: Reliable
+      Durability Policy: Volatile
+      Depth: 10
+  - Class: rviz_default_plugins/MarkerArray
+    Name: AprilTag landmarks
+    Enabled: true
+    Topic:
+      Value: /landmark_poses_list
+      Reliability Policy: Reliable
+      Durability Policy: Volatile
+      Depth: 10
+  - Class: rviz_default_plugins/MarkerArray
+    Name: Constraints
+    Enabled: false
+    Topic:
+      Value: /constraint_list
+      Reliability Policy: Reliable
+      Durability Policy: Volatile
+      Depth: 10
+  Views:
+    Current:
+      Class: rviz_default_plugins/TopDownOrtho
+      Name: Current View
+      Angle: 0.0
+      Scale: 10.0
+      X: -12.5
+      Y: -16.5
+  Tools:
+  - Class: rviz_default_plugins/Interact
+  - Class: rviz_default_plugins/MoveCamera
+  - Class: rviz_default_plugins/Select
+  - Class: rviz_default_plugins/SetInitialPose
+    Topic:
+      Value: /initialpose
+Window Geometry:
+  Width: 1600
+  Height: 950
+  Hide Left Dock: false
+  Hide Right Dock: true

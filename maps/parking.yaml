@@ -1,0 +1,6 @@
+image: /home/ubuntu22/study/slam/maps/parking.pgm
+resolution: 0.050000
+origin: [-59.994556, -43.060455, 0.0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196
